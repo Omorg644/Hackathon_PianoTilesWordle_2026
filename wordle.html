@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wordle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_alt.css') }}">
+    
+</head>
+
+<body>
+    <header>
+        <h1>WORDLE</h1>
+    </header>
+
+    <main>
+        <p id="message" role="status">{{ message }}</p>
+
+        <div class="board">
+            {% for row in range(6) %}
+                <div class="row">
+                    {% for col in range(5) %}
+                        {% if row < guesses|length %}
+                            {% set guess = guesses[row] %}
+                            <div class="tile {{ guess.result[col] }}">
+                                {{ guess.word[col] }}
+                            </div>
+                        {% else %}
+                            <div class="tile"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if not game_over %}
+            <!-- <form method="POST"> -->
+
+                <div class="piano">
+                    <!-- White keys -->
+                    <!-- White keys -->
+                    <button class="key white" data-note="C" data-key="d">C</button>
+                    <button class="key white" data-note="D" data-key="f">D</button>
+                    <button class="key white" data-note="E" data-key="g">E</button>
+                    <button class="key white" data-note="F" data-key="h">F</button>
+                    <button class="key white" data-note="G" data-key="j">G</button>
+                    <button class="key white" data-note="A" data-key="a">A</button>
+                    <button class="key white" data-note="B" data-key="s">B</button>
+
+                    <!-- Black keys -->
+                    <button class="key black" data-note="Cs" data-key="w">C#</button>
+                    <button class="key black" data-note="Ds" data-key="e">D#</button>
+                    <button class="key black" data-note="Fs" data-key="t">F#</button>
+                    <button class="key black" data-note="Gs" data-key="y">G#</button>
+                    <button class="key black" data-note="As" data-key="u">A#</button>
+                </div>
+                <!-- <button type="submit">Submit Guess</button> -->
+            <!-- </form> -->
+        {% else %}
+            <form method="POST">
+                <input type="hidden" name="guess" value="NEW">
+                <button type="submit">Play Again</button>
+            </form>
+        {% endif %}
+
+    </main>
+</body>
+</html>
