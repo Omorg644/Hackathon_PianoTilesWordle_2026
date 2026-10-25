@@ -1,7 +1,7 @@
 ZIP FILE IS FINISHED PROJECT
 to run, open terminal then:
 
-pip install flask
+pip install flask // python -m pip install flask
 
 cd (filepath to folder)
 
